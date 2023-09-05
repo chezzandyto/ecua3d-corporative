@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IColorRepository extends CrudRepository <ColorEntity, Integer> {
+public interface IColorRepository extends CrudRepository<ColorEntity, Integer> {
         List<ColorEntity> findAll();
         Boolean existsByNameColor(String nameColor);
 }

@@ -1,9 +1,10 @@
 package com.ecua3d.corporative.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 
 @Data
 @Entity

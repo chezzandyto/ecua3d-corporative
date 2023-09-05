@@ -2,19 +2,19 @@ package com.ecua3d.corporative.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import java.util.Date;
 
 @Data
 @MappedSuperclass
 public class AuditingFields {
     @Column(name = "created_by_user")
-    private Integer createByUser;
+    private String createByUser;
     @Column(name = "created_date")
     private Date createdDate ;
     @Column(name = "last_modified_by_user")
-    private Integer lastModifiedByUser;
+    private String lastModifiedByUser;
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
     @Column(name = "created_from_ip")
