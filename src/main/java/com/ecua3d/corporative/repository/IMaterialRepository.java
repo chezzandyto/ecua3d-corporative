@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IMaterialRepository extends CrudRepository <MaterialEntity, Integer> {
+public interface IMaterialRepository extends CrudRepository<MaterialEntity, Integer> {
         List<MaterialEntity> findAll();
         Boolean existsByNameMaterial(String nameMaterial);
 }
