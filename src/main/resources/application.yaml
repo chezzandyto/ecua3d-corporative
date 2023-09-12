@@ -13,23 +13,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://192.168.100.17:8080/auth/realms/ecua3d
-          jwk-set-uri: http://192.168.100.17:8080/auth/realms/ecua3d/protocol/openid-connect/certs
-
-keycloak:
-  enabled: true
-  bearer-only: true
-  auth-server-url: http://192.168.100.17:8080/
-  resource: ecua3d-backend
-  realm: ecua3d
-  public-client: true
-  principal-attribute: preferred_username
-  credentials:
-    secret: ExodcKjK4jCaKvVOdjgvq2fLG8Xkupfo
-  use-resource-role-mappings: true
-  allowAnyHostname: true
-  ssl-required: external
-
+          issuer-uri: http://192.168.100.17:8080/realms/ecua3d
+          jwt-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 token:
   converter:

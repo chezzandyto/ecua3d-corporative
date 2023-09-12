@@ -15,27 +15,15 @@ public class GlobalSecurityConfiguration {
     private final KeycloakJwtTokenConverter keycloakJwtTokenConverter;
 
     public GlobalSecurityConfiguration(TokenConverterProperties properties) {
-        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter
-                = new JwtGrantedAuthoritiesConverter();
-        this.keycloakJwtTokenConverter
-                = new KeycloakJwtTokenConverter(
-                jwtGrantedAuthoritiesConverter,
-                properties);
+        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        this.keycloakJwtTokenConverter = new KeycloakJwtTokenConverter(jwtGrantedAuthoritiesConverter, properties);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
-        http
-                .oauth2ResourceServer()
-                .jwt()
-                .jwtAuthenticationConverter(keycloakJwtTokenConverter);
-        http
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeHttpRequests(aMR -> aMR.anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(keycloakJwtTokenConverter)))
+                .sessionManagement(sessionMng -> sessionMng.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 }
