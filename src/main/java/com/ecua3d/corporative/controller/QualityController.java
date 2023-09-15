@@ -1,11 +1,10 @@
 package com.ecua3d.corporative.controller;
 
 import com.ecua3d.corporative.exception.EntityExistsException;
+import com.ecua3d.corporative.exception.EntityNoExistsException;
 import com.ecua3d.corporative.service.IMaterialService;
 import com.ecua3d.corporative.service.IQualityService;
-import com.ecua3d.corporative.vo.MaterialDTO;
-import com.ecua3d.corporative.vo.MaterialResponse;
-import com.ecua3d.corporative.vo.QualityResponse;
+import com.ecua3d.corporative.vo.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +24,10 @@ public class QualityController {
     @GetMapping
     public ResponseEntity<List<QualityResponse>> getAllQualities(){
         return new ResponseEntity<List<QualityResponse>>(iQualityService.findAll(), HttpStatus.OK);
+    }
+    @PatchMapping("/update-quality")
+    public ResponseEntity<QualityResponse> updateQuality(@RequestBody @Valid QualityUpdateDTO body) throws EntityNoExistsException {
+        return new ResponseEntity<>(iQualityService.updateQuality(body),HttpStatus.OK);
     }
 
 }
