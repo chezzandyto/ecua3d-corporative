@@ -18,5 +18,6 @@ public class ColorEntity extends AuditingFields{
     private Integer colorId;
     @Column(name = "name")
     private String nameColor;
+    private Byte hexadecimal;
 
 }

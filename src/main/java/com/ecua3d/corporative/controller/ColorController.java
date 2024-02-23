@@ -3,6 +3,7 @@ package com.ecua3d.corporative.controller;
 import com.ecua3d.corporative.exception.EntityExistsException;
 import com.ecua3d.corporative.exception.EntityNoExistsException;
 import com.ecua3d.corporative.service.IColorService;
+import com.ecua3d.corporative.vo.ColorAndHexResponse;
 import com.ecua3d.corporative.vo.ColorDTO;
 import com.ecua3d.corporative.vo.ColorResponse;
 
@@ -35,4 +36,9 @@ public class ColorController {
     public ResponseEntity<ColorResponse> updateColor(@RequestBody @Valid ColorUpdateDTO body) throws EntityNoExistsException {
         return new ResponseEntity<>(iColorService.updateColor(body),HttpStatus.OK);
     }
+    //PENDIENTE TERMINAR SERVICIO PARA BUSCAR HEX LUEGO DE ELEGIR UN COLOR
+//    @GetMapping
+//    public ResponseEntity<List<ColorAndHexResponse>> getAllHex(Integer colorId) throws EntityNoExistsException {
+//        return new ResponseEntity<List<ColorAndHexResponse>>(iColorService.findByColorId(colorId), HttpStatus.OK);
+//    }
 }
