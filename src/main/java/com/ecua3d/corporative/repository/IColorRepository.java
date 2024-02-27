@@ -5,9 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IColorRepository extends CrudRepository<ColorEntity, Integer> {
         List<ColorEntity> findAll();
         Boolean existsByNameColor(String nameColor);
+
+        List<ColorEntity> findByNameColor(String colorName);
+        Optional<ColorEntity> findByColorId(Integer colorId);
 }
