@@ -32,7 +32,7 @@ public class ColorController {
         return new ResponseEntity<>(iColorService.saveNewColor(body),HttpStatus.CREATED);
     }
     @PatchMapping("/{colorId}")
-    public ResponseEntity<ColorResponse> updateColor(@RequestBody @Valid ColorUpdateDTO body, @PathVariable Integer colorId) throws EntityNoExistsException {
+    public ResponseEntity<ColorResponse> updateColor(@PathVariable Integer colorId, @RequestBody @Valid ColorUpdateDTO body) throws EntityNoExistsException {
         return new ResponseEntity<>(iColorService.updateColor(colorId, body),HttpStatus.OK);
     }
 

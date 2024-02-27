@@ -8,7 +8,7 @@ spring:
     username: postgres
     password: homeassistant
   jpa:
-    show-sql: true
+    show-sql: false
   security:
     oauth2:
       resourceserver:

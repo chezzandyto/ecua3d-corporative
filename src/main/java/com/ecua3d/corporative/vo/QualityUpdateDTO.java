@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class QualityUpdateDTO {
-    @NotNull
-    private Integer qualityId;
+
     @NotBlank(message = "Nombre de area no puede ser vacío")
     @Size(message = "Nombre de area maximo de 64 caracteres y minimo 3",min= 3,max = 64)
     private String nameQuality;
