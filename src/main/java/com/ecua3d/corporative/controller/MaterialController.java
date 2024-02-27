@@ -24,12 +24,12 @@ public class MaterialController {
     public ResponseEntity<List<MaterialResponse>> getAllMaterial(){
         return new ResponseEntity<List<MaterialResponse>>(iMaterialService.findAll(), HttpStatus.OK);
     }
-    @PostMapping("/save-new-material")
+    @PostMapping
     public ResponseEntity<MaterialResponse> saveNewMaterial(@RequestBody @Valid MaterialDTO body) throws EntityExistsException {
         return new ResponseEntity<>(iMaterialService.saveNewMaterial(body),HttpStatus.CREATED);
     }
-    @PatchMapping("/update-material")
-    public ResponseEntity<MaterialResponse> updateMaterial(@RequestBody @Valid MaterialUpdateDTO body) throws EntityNoExistsException {
-        return new ResponseEntity<>(iMaterialService.updateMaterial(body),HttpStatus.OK);
+    @PatchMapping("/{materialId}")
+    public ResponseEntity<MaterialResponse> updateMaterial(@PathVariable Integer materialId, @RequestBody @Valid MaterialUpdateDTO body) throws EntityNoExistsException {
+        return new ResponseEntity<>(iMaterialService.updateMaterial(materialId, body),HttpStatus.OK);
     }
 }

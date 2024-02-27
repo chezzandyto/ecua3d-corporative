@@ -38,8 +38,8 @@ public class QualityService implements IQualityService {
     }
 
     @Override
-    public QualityResponse updateQuality(QualityUpdateDTO qualityUpdateDTO) throws EntityNoExistsException {
-        QualityEntity updatableEntity = findByQualityId(qualityUpdateDTO.getQualityId());
+    public QualityResponse updateQuality(Integer qualityId, QualityUpdateDTO qualityUpdateDTO) throws EntityNoExistsException {
+        QualityEntity updatableEntity = findByQualityId(qualityId);
         updatableEntity.setNameQuality(qualityUpdateDTO.getNameQuality());
         iQualityRepository.save(updatableEntity);
         return convertToQualityResponse(updatableEntity);

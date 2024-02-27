@@ -70,8 +70,8 @@ public class FilamentService implements IFilamentService {
     }
 
     @Override
-    public FilamentResponse updateFilament(FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException {
-        FilamentEntity updatableEntity = findByFilamentId(filamentUpdateDTO.getFilamentId());
+    public FilamentResponse updateFilament(Integer filamentId, FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException {
+        FilamentEntity updatableEntity = findByFilamentId(filamentId);
         updatableEntity.setColorId(filamentUpdateDTO.getColorId());
         updatableEntity.setMaterialId(filamentUpdateDTO.getMaterialId());
         updatableEntity.setBrand(filamentUpdateDTO.getBrand());

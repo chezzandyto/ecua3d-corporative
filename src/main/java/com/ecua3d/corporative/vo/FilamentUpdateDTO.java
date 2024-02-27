@@ -16,8 +16,6 @@ import java.math.BigDecimal;
 @Builder
 public class FilamentUpdateDTO {
 
-    @NotNull
-    private Integer filamentId;
     private Integer colorId;
     private Integer materialId;
     @NotBlank(message = "Marca de filamento no puede ser vacío")

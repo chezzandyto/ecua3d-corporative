@@ -16,5 +16,5 @@ public interface IQualityService {
     List<QualityResponse> findAll();
     QualityResponse convertToQualityResponse(QualityEntity qualityEntity);
     QualityEntity findByQualityId(Integer qualityId) throws EntityNoExistsException;
-    QualityResponse updateQuality(QualityUpdateDTO qualityUpdateDTO) throws EntityNoExistsException;
+    QualityResponse updateQuality(Integer qualityId, QualityUpdateDTO qualityUpdateDTO) throws EntityNoExistsException;
 }

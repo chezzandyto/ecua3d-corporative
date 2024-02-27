@@ -15,5 +15,5 @@ public interface IFilamentService {
     FilamentResponse convertToFilamentResponse(FilamentEntity filamentEntity);
     FilamentResponse saveNewFilament(FilamentDTO filamentDTO) throws EntityExistsException;
     FilamentEntity findByFilamentId(Integer filamentId) throws EntityNoExistsException;
-    FilamentResponse updateFilament(FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException;
+    FilamentResponse updateFilament(Integer filamentId, FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException;
 }

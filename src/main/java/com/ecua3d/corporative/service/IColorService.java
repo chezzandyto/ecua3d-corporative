@@ -16,5 +16,6 @@ public interface IColorService {
     ColorResponse convertToColorResponse(ColorEntity colorEntity);
     ColorResponse saveNewColor(ColorDTO colorDTO) throws EntityExistsException;
     ColorEntity findByColorId(Integer colorId) throws EntityNoExistsException;
-    ColorResponse updateColor(ColorUpdateDTO colorUpdateDTO) throws EntityNoExistsException;
+    ColorResponse updateColor(Integer colorId, ColorUpdateDTO colorUpdateDTO) throws EntityNoExistsException;
+    List<ColorResponse> findByColorName(String colorName) throws EntityNoExistsException;
 }

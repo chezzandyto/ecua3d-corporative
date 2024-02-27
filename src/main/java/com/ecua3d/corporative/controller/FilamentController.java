@@ -24,13 +24,14 @@ public class FilamentController {
     public ResponseEntity<List<FilamentResponse>> getAllFilament(){
         return new ResponseEntity<List<FilamentResponse>>(iFilamentService.findAll(), HttpStatus.OK);
     }
-    @PostMapping("/save-new-filament")
+    @PostMapping
+
     public ResponseEntity<FilamentResponse> saveNewFilament(@RequestBody @Valid FilamentDTO body) throws EntityExistsException {
         return new ResponseEntity<>(iFilamentService.saveNewFilament(body),HttpStatus.CREATED);
     }
-    @PatchMapping("/update-filament")
-    public ResponseEntity<FilamentResponse> updateFilament(@RequestBody @Valid FilamentUpdateDTO body) throws EntityNoExistsException {
-        return new ResponseEntity<>(iFilamentService.updateFilament(body),HttpStatus.OK);
+    @PatchMapping("/{filamentId}")
+    public ResponseEntity<FilamentResponse> updateFilament(@PathVariable Integer filamentId, @RequestBody @Valid FilamentUpdateDTO body) throws EntityNoExistsException {
+        return new ResponseEntity<>(iFilamentService.updateFilament(filamentId, body),HttpStatus.OK);
     }
 
 }

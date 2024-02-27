@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class ColorResponse {
     private Integer colorId;
     private String nameColor;
+    private String hexadecimal;
 
 }

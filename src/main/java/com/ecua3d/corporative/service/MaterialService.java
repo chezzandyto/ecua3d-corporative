@@ -51,8 +51,8 @@ public class MaterialService implements IMaterialService {
     }
 
     @Override
-    public MaterialResponse updateMaterial(MaterialUpdateDTO materialUpdateDTO) throws EntityNoExistsException {
-        MaterialEntity updatableEntity = findByMaterialId(materialUpdateDTO.getMaterialId());
+    public MaterialResponse updateMaterial(Integer materialId, MaterialUpdateDTO materialUpdateDTO) throws EntityNoExistsException {
+        MaterialEntity updatableEntity = findByMaterialId(materialId);
         updatableEntity.setNameMaterial(materialUpdateDTO.getNameMaterial());
         iMaterialRepository.save(updatableEntity);
         return convertToMaterialResponse(updatableEntity);

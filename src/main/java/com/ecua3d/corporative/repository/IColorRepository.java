@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface IColorRepository extends CrudRepository<ColorEntity, Integer> {
         List<ColorEntity> findAll();
         Boolean existsByNameColor(String nameColor);
+
+        List<ColorEntity> findByNameColor(String colorName);
         Optional<ColorEntity> findByColorId(Integer colorId);
 }

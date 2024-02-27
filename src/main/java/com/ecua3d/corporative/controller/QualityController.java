@@ -25,9 +25,8 @@ public class QualityController {
     public ResponseEntity<List<QualityResponse>> getAllQualities(){
         return new ResponseEntity<List<QualityResponse>>(iQualityService.findAll(), HttpStatus.OK);
     }
-    @PatchMapping("/update-quality")
-    public ResponseEntity<QualityResponse> updateQuality(@RequestBody @Valid QualityUpdateDTO body) throws EntityNoExistsException {
-        return new ResponseEntity<>(iQualityService.updateQuality(body),HttpStatus.OK);
+    @PatchMapping("/{qualityId}")
+    public ResponseEntity<QualityResponse> updateQuality(@PathVariable Integer qualityId, @RequestBody @Valid QualityUpdateDTO body) throws EntityNoExistsException {
+        return new ResponseEntity<>(iQualityService.updateQuality(qualityId, body),HttpStatus.OK);
     }
-
 }

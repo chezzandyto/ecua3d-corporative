@@ -15,6 +15,6 @@ public interface IMaterialService {
     MaterialResponse convertToMaterialResponse(MaterialEntity materialEntity);
     MaterialResponse saveNewMaterial(MaterialDTO materialDTO) throws EntityExistsException;
     MaterialEntity findByMaterialId(Integer materialId) throws EntityNoExistsException;
-    MaterialResponse updateMaterial(MaterialUpdateDTO materialUpdateDTO) throws EntityNoExistsException;
+    MaterialResponse updateMaterial(Integer materialId, MaterialUpdateDTO materialUpdateDTO) throws EntityNoExistsException;
 
 }

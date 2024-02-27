@@ -31,6 +31,7 @@ public class ColorService implements IColorService {
         return ColorResponse.builder()
                 .colorId(colorEntity.getColorId())
                 .nameColor(colorEntity.getNameColor())
+                .hexadecimal(colorEntity.getHexadecimal())
                 .build();
     }
     @Override
@@ -39,6 +40,7 @@ public class ColorService implements IColorService {
         if (ifExists) throw new EntityExistsException(HttpStatus.BAD_REQUEST,"Ya existe: " +colorDTO.getNameColor());
         ColorEntity newEntity = new ColorEntity();
         newEntity.setNameColor(colorDTO.getNameColor());
+        newEntity.setHexadecimal(colorDTO.getHexadecimal());
         iColorRepository.save(newEntity);
         return convertToColorResponse(newEntity);
     }
@@ -50,10 +52,17 @@ public class ColorService implements IColorService {
     }
 
     @Override
-    public ColorResponse updateColor(ColorUpdateDTO colorUpdateDTO) throws EntityNoExistsException {
-       ColorEntity updatableEntity = findByColorId(colorUpdateDTO.getColorId());
+    public ColorResponse updateColor(Integer colorId, ColorUpdateDTO colorUpdateDTO) throws EntityNoExistsException {
+       ColorEntity updatableEntity = findByColorId(colorId);
        updatableEntity.setNameColor(colorUpdateDTO.getNameColor());
+       updatableEntity.setHexadecimal(colorUpdateDTO.getHexadecimal());
        iColorRepository.save(updatableEntity);
        return convertToColorResponse(updatableEntity);
+    }
+
+    @Override
+    public List<ColorResponse> findByColorName(String colorName) throws EntityNoExistsException {
+        List<ColorEntity> colorEntities = (List<ColorEntity>) iColorRepository.findByNameColor(colorName);
+        return colorEntities.stream().map(this::convertToColorResponse).collect(Collectors.toList());
     }
 }
