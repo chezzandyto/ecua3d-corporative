@@ -26,12 +26,17 @@ public class FilamentController {
     }
     @PostMapping
 
-    public ResponseEntity<FilamentResponse> saveNewFilament(@RequestBody @Valid FilamentDTO body) throws EntityExistsException {
+    public ResponseEntity<FilamentResponse> saveNewFilament(@RequestBody @Valid FilamentDTO body) {
         return new ResponseEntity<>(iFilamentService.saveNewFilament(body),HttpStatus.CREATED);
     }
     @PatchMapping("/{filamentId}")
     public ResponseEntity<FilamentResponse> updateFilament(@PathVariable Integer filamentId, @RequestBody @Valid FilamentUpdateDTO body) throws EntityNoExistsException {
         return new ResponseEntity<>(iFilamentService.updateFilament(filamentId, body),HttpStatus.OK);
+    }
+
+    @GetMapping("/{filamentId}")
+    public ResponseEntity<FilamentToQuoteResponse> getByFilamentId(@PathVariable Integer filamentId) throws EntityNoExistsException {
+        return new ResponseEntity<FilamentToQuoteResponse>(iFilamentService.findByFilamentIdRestResponse(filamentId), HttpStatus.OK);
     }
 
 }
