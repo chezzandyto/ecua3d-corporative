@@ -1,12 +1,9 @@
 package com.ecua3d.corporative.service;
 
-import com.ecua3d.corporative.exception.EntityExistsException;
 import com.ecua3d.corporative.exception.EntityNoExistsException;
-import com.ecua3d.corporative.model.ColorEntity;
 import com.ecua3d.corporative.model.FilamentEntity;
 import com.ecua3d.corporative.repository.IFilamentRepository;
 import com.ecua3d.corporative.vo.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +13,16 @@ import java.util.stream.Collectors;
 @Service
 public class FilamentService implements IFilamentService {
 
-    @Autowired
-    private IColorService iColorService;
+    private final IColorService iColorService;
+    private final IMaterialService iMaterialService;
+    private final IFilamentRepository iFilamentRepository;
 
-    @Autowired
-    private IMaterialService iMaterialService;
-    @Autowired
-    private IFilamentRepository iFilamentRepository;
+    public FilamentService(IColorService iColorService, IMaterialService iMaterialService, IFilamentRepository iFilamentRepository) {
+        this.iColorService = iColorService;
+        this.iMaterialService = iMaterialService;
+        this.iFilamentRepository = iFilamentRepository;
+    }
+
     @Override
     public List<FilamentResponse> findAll() {
         List<FilamentEntity> filamentEntities = (List<FilamentEntity>) iFilamentRepository.findAll();
@@ -46,9 +46,7 @@ public class FilamentService implements IFilamentService {
     }
 
     @Override
-    public FilamentResponse saveNewFilament(FilamentDTO filamentDTO) throws EntityExistsException {
-//        Boolean ifExists=iFilamentRepository.existsByNameFilament(filamentDTO..getNameColor());
-//        if (ifExists) throw new EntityExistsException(HttpStatus.BAD_REQUEST,"Ya existe: " +colorDTO.getNameColor());
+    public FilamentResponse saveNewFilament(FilamentDTO filamentDTO) {
         FilamentEntity newEntity = new FilamentEntity();
         newEntity.setColorId(filamentDTO.getColorId());
         newEntity.setMaterialId(filamentDTO.getMaterialId());
@@ -70,6 +68,15 @@ public class FilamentService implements IFilamentService {
     }
 
     @Override
+    public FilamentToQuoteResponse findByFilamentIdRestResponse(Integer filamentId) throws EntityNoExistsException {
+        FilamentEntity response = findByFilamentId(filamentId);
+        return FilamentToQuoteResponse.builder()
+                .material(response.getMaterialEntity().getNameMaterial())
+                .color(response.getColorEntity().getNameColor())
+                .build();
+    }
+
+    @Override
     public FilamentResponse updateFilament(Integer filamentId, FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException {
         FilamentEntity updatableEntity = findByFilamentId(filamentId);
         updatableEntity.setColorId(filamentUpdateDTO.getColorId());
@@ -84,6 +91,4 @@ public class FilamentService implements IFilamentService {
         iFilamentRepository.save(updatableEntity);
         return convertToFilamentResponse(updatableEntity);
     }
-
-
 }

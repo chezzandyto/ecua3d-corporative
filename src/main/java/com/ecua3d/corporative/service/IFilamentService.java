@@ -13,7 +13,8 @@ import java.util.List;
 public interface IFilamentService {
     List<FilamentResponse> findAll();
     FilamentResponse convertToFilamentResponse(FilamentEntity filamentEntity);
-    FilamentResponse saveNewFilament(FilamentDTO filamentDTO) throws EntityExistsException;
+    FilamentResponse saveNewFilament(FilamentDTO filamentDTO);
     FilamentEntity findByFilamentId(Integer filamentId) throws EntityNoExistsException;
+    FilamentToQuoteResponse findByFilamentIdRestResponse(Integer filamentId) throws EntityNoExistsException;
     FilamentResponse updateFilament(Integer filamentId, FilamentUpdateDTO filamentUpdateDTO) throws EntityNoExistsException;
 }

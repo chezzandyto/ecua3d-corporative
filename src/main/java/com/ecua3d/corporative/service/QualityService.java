@@ -1,9 +1,12 @@
 package com.ecua3d.corporative.service;
 
 import com.ecua3d.corporative.exception.EntityNoExistsException;
+import com.ecua3d.corporative.model.FilamentEntity;
 import com.ecua3d.corporative.model.QualityEntity;
 import com.ecua3d.corporative.repository.IQualityRepository;
+import com.ecua3d.corporative.vo.FilamentToQuoteResponse;
 import com.ecua3d.corporative.vo.QualityResponse;
+import com.ecua3d.corporative.vo.QualityToQuoteResponse;
 import com.ecua3d.corporative.vo.QualityUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +38,14 @@ public class QualityService implements IQualityService {
     public QualityEntity findByQualityId(Integer qualityId) throws EntityNoExistsException {
         return iQualityRepository.findByQualityId(qualityId)
                 .orElseThrow(() -> new EntityNoExistsException(HttpStatus.BAD_REQUEST,"No existe"));
+    }
+
+    @Override
+    public QualityToQuoteResponse findByQualityIdRestResponse(Integer qualityId) throws EntityNoExistsException {
+        QualityEntity response = findByQualityId(qualityId);
+        return QualityToQuoteResponse.builder()
+                .nameQuality(response.getNameQuality())
+                .build();
     }
 
     @Override

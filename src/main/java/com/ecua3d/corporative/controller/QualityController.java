@@ -29,4 +29,9 @@ public class QualityController {
     public ResponseEntity<QualityResponse> updateQuality(@PathVariable Integer qualityId, @RequestBody @Valid QualityUpdateDTO body) throws EntityNoExistsException {
         return new ResponseEntity<>(iQualityService.updateQuality(qualityId, body),HttpStatus.OK);
     }
+    @GetMapping("/{qualityId}")
+    public ResponseEntity<QualityToQuoteResponse> getByQualityId(@PathVariable Integer qualityId) throws EntityNoExistsException {
+        return new ResponseEntity<QualityToQuoteResponse>(iQualityService.findByQualityIdRestResponse(qualityId), HttpStatus.OK);
+    }
+
 }
