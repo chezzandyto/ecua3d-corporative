@@ -1,6 +1,5 @@
 package com.ecua3d.corporative.controller;
 
-import com.ecua3d.corporative.exception.EntityExistsException;
 import com.ecua3d.corporative.exception.EntityNoExistsException;
 import com.ecua3d.corporative.service.IFilamentService;
 import com.ecua3d.corporative.vo.*;
