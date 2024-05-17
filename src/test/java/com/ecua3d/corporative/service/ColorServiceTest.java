@@ -15,7 +15,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class ColorServiceTest {
@@ -28,6 +29,8 @@ class ColorServiceTest {
         when(iColorRepository.findAll()).thenReturn(List.of(new ColorEntity()));
         List<ColorResponse> response  = colorService.findAll();
         assertInstanceOf(ColorResponse.class,response.get(0));
+        verify(iColorRepository, times(1)).findAll();
+        verifyNoMoreInteractions(iColorRepository);
     }
 
     @Test

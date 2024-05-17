@@ -14,7 +14,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class MaterialServiceTest {
@@ -29,6 +30,8 @@ class MaterialServiceTest {
         List<MaterialResponse> response  = materialService.findAll();
 
         assertInstanceOf(MaterialResponse.class,response.get(0));
+        verify(iMaterialRepository, times(1)).findAll();
+        verifyNoMoreInteractions(iMaterialRepository);
     }
 
     @Test

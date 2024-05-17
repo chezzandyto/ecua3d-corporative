@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class QualityServiceTest {
@@ -28,6 +28,8 @@ class QualityServiceTest {
         List<QualityResponse> response  = qualityService.findAll();
 
         assertInstanceOf(QualityResponse.class,response.get(0));
+        verify(iQualityRepository, times(1)).findAll();
+        verifyNoMoreInteractions(iQualityRepository);
     }
 
     @Test
