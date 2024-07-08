@@ -1,5 +1,6 @@
 package com.ecua3d.corporative.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import jakarta.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "corpt_material", schema = "corporative")
 public class MaterialEntity extends AuditingFields{
     @Id
