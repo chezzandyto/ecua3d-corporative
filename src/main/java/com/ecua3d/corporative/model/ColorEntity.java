@@ -1,6 +1,7 @@
 package com.ecua3d.corporative.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "corpt_color", schema = "corporative")
 public class ColorEntity extends AuditingFields{
     @Id
@@ -18,5 +20,6 @@ public class ColorEntity extends AuditingFields{
     private Integer colorId;
     @Column(name = "name")
     private String nameColor;
+    private String hexadecimal;
 
 }

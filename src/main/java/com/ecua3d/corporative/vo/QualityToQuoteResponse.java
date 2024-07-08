@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ColorResponse {
-    private Integer colorId;
-    private String nameColor;
-    private String hexadecimal;
-
+public class QualityToQuoteResponse {
+    private String nameQuality;
 }

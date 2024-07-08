@@ -1,10 +1,13 @@
 package com.ecua3d.corporative.service;
 
 import com.ecua3d.corporative.exception.EntityExistsException;
+import com.ecua3d.corporative.exception.EntityNoExistsException;
+import com.ecua3d.corporative.model.ColorEntity;
 import com.ecua3d.corporative.model.MaterialEntity;
 import com.ecua3d.corporative.repository.IMaterialRepository;
 import com.ecua3d.corporative.vo.MaterialDTO;
 import com.ecua3d.corporative.vo.MaterialResponse;
+import com.ecua3d.corporative.vo.MaterialUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -39,6 +42,20 @@ public class MaterialService implements IMaterialService {
         newEntity.setNameMaterial(materialDTO.getNameMaterial());
         iMaterialRepository.save(newEntity);
         return convertToMaterialResponse(newEntity);
+    }
+
+    @Override
+    public MaterialEntity findByMaterialId(Integer materialId) throws EntityNoExistsException {
+        return iMaterialRepository.findByMaterialId(materialId)
+                .orElseThrow(() -> new EntityNoExistsException(HttpStatus.BAD_REQUEST,"No existe"));
+    }
+
+    @Override
+    public MaterialResponse updateMaterial(Integer materialId, MaterialUpdateDTO materialUpdateDTO) throws EntityNoExistsException {
+        MaterialEntity updatableEntity = findByMaterialId(materialId);
+        updatableEntity.setNameMaterial(materialUpdateDTO.getNameMaterial());
+        iMaterialRepository.save(updatableEntity);
+        return convertToMaterialResponse(updatableEntity);
     }
 
 

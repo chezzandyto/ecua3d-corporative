@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ColorResponse {
-    private Integer colorId;
-    private String nameColor;
-    private String hexadecimal;
+public class FilamentToQuoteResponse {
+    private String material;
+    private String color;
+
 
 }

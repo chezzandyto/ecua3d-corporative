@@ -1,9 +1,9 @@
 package com.ecua3d.corporative.controller;
 
 import com.ecua3d.corporative.exception.EntityExistsException;
+import com.ecua3d.corporative.exception.EntityNoExistsException;
 import com.ecua3d.corporative.service.IMaterialService;
-import com.ecua3d.corporative.vo.MaterialDTO;
-import com.ecua3d.corporative.vo.MaterialResponse;
+import com.ecua3d.corporative.vo.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +24,12 @@ public class MaterialController {
     public ResponseEntity<List<MaterialResponse>> getAllMaterial(){
         return new ResponseEntity<List<MaterialResponse>>(iMaterialService.findAll(), HttpStatus.OK);
     }
-    @PostMapping("/save-new-material")
+    @PostMapping
     public ResponseEntity<MaterialResponse> saveNewMaterial(@RequestBody @Valid MaterialDTO body) throws EntityExistsException {
         return new ResponseEntity<>(iMaterialService.saveNewMaterial(body),HttpStatus.CREATED);
     }
-
+    @PatchMapping("/{materialId}")
+    public ResponseEntity<MaterialResponse> updateMaterial(@PathVariable Integer materialId, @RequestBody @Valid MaterialUpdateDTO body) throws EntityNoExistsException {
+        return new ResponseEntity<>(iMaterialService.updateMaterial(materialId, body),HttpStatus.OK);
+    }
 }

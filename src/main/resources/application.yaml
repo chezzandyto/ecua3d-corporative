@@ -6,9 +6,9 @@ spring:
   datasource:
     url: jdbc:postgresql://192.168.100.17:5432/ecua3d
     username: postgres
-    password: 123456
+    password: homeassistant
   jpa:
-    show-sql: true
+    show-sql: false
   security:
     oauth2:
       resourceserver:
